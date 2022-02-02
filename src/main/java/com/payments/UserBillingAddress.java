@@ -1,5 +1,7 @@
 package com.payments;
 
+import java.util.Objects;
+
 public class UserBillingAddress {
     private String userID;
     private String billingAddress;
@@ -11,5 +13,18 @@ public class UserBillingAddress {
         this.userContact = userContact;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserBillingAddress that = (UserBillingAddress) o;
+        return Objects.equals(userID, that.userID) &&
+                Objects.equals(billingAddress, that.billingAddress) &&
+                Objects.equals(userContact, that.userContact);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(userID, billingAddress, userContact);
+    }
 }
