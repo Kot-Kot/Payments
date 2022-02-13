@@ -3,11 +3,11 @@ package com.payments;
 import java.util.Objects;
 
 public class UserBillingAddress {
-    private String userID;
+    private int userID;
     private String billingAddress;
     private String userContact;
 
-    public UserBillingAddress(String userID, String billingAddress, String userContact) {
+    public UserBillingAddress(int userID, String billingAddress, String userContact) {
         this.userID = userID;
         this.billingAddress = billingAddress;
         this.userContact = userContact;

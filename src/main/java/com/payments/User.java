@@ -5,7 +5,7 @@ import java.util.Objects;
 public class User {
     private String fio;
     private String email;
-    private  String phone;
+    private String phone;
 
     public User(String fio, String email, String phone) {
         this.fio = fio;
