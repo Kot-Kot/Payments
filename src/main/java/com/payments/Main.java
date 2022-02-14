@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         String str = "";
         ArrayList<String> strings = new ArrayList<>();
-        try(FileReader reader = new FileReader("initdata.txt"))
+        try(FileReader reader = new FileReader("initdata1.txt"))
         {
             // читаем посимвольно
             int c;
@@ -113,6 +113,9 @@ public class Main {
         {
             System.out.println(paymentList.get(i));
         }
+        MyThread myThread = new MyThread("MyThread", paymentList);
+        myThread.start();
+
     }
 
 
