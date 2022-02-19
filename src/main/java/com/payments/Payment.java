@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Payment {
-    private int id;
-    private int templateId;
+    private long id;
+    private long templateId;
     private String cardNumber;
     private double sum;
 //    private enum status {
@@ -21,7 +21,7 @@ public class Payment {
 
     }
 
-    public Payment(int id, int templateId, String cardNumber, double sum, String status, LocalDateTime creationDateTime, LocalDateTime statusChangedDateTime) {
+    public Payment(long id, long templateId, String cardNumber, double sum, String status, LocalDateTime creationDateTime, LocalDateTime statusChangedDateTime) {
         this.id = id;
         this.templateId = templateId;
         this.cardNumber = cardNumber;
@@ -62,7 +62,7 @@ public class Payment {
                 '}';
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -70,7 +70,7 @@ public class Payment {
         this.id = id;
     }
 
-    public int getTemplateId() {
+    public long getTemplateId() {
         return templateId;
     }
 

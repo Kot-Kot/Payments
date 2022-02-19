@@ -3,7 +3,7 @@ package com.payments;
 import java.util.Objects;
 
 public class UserBillingAddress {
-    private int userID;
+    private long userID;
     private String billingAddress;
     private String userContact;
 
