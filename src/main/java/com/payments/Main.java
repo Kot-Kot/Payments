@@ -86,9 +86,10 @@ public class Main {
 
 
 
-
-            ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
-            readPayments.start();
+            new UserDAO().readFromUsersTable(connection());
+            new TemplateDAO().readFromTemplatesTable(connection());
+            //ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
+            //readPayments.start();
 
 
 

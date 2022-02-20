@@ -1,9 +1,6 @@
 package com.payments.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDateTime;
 
 public class TemplateDAO {
@@ -24,5 +21,24 @@ public class TemplateDAO {
             System.exit(0);
         }
         //log.info("Success insertIntoTemplatesTable " + LocalDateTime.now());
+    }
+
+    public void readFromTemplatesTable(Connection connection) {
+        System.out.println("Templates Table");
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery("select * from templates");
+            while (rs.next()) {
+                System.out.println();
+                System.out.printf("%s\t%s\t%s\t%s",
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

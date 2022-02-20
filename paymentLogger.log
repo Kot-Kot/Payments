@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-02-20T20:03:51.841473200Z</date>
-  <millis>1645387431841</millis>
-  <nanos>473200</nanos>
+  <date>2022-02-20T20:29:12.546917300Z</date>
+  <millis>1645388952546</millis>
+  <nanos>917300</nanos>
   <sequence>0</sequence>
   <logger>com.payments.Main</logger>
   <level>INFO</level>
@@ -13,3 +13,4 @@
   <thread>1</thread>
   <message>Read from init file</message>
 </record>
+</log>
