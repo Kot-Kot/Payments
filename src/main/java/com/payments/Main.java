@@ -2,6 +2,10 @@ package com.payments;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +21,7 @@ public class Main {
         LogManager.getLogManager().reset();
         log.setLevel(Level.ALL);
         try {
-            FileHandler fileHandler = new FileHandler("paymentLogger.log", true);
+            FileHandler fileHandler = new FileHandler("paymentLogger.log");
             //fileHandler.setFormatter();
             fileHandler.setLevel(Level.ALL);
             log.addHandler(fileHandler);
@@ -36,6 +40,20 @@ public class Main {
         String[] billingAddressArr = null;
         String[] templateArr = null;
         String[] paymentArr = null;
+
+        static Connection createConnection() {
+            Connection connection = null;
+            Statement statement = null;
+            PreparedStatement preparedStatement = null;
+            try {
+                Class.forName("org.postgresql.Driver");
+                connection = DriverManager
+                        .getConnection("jdbc:postgresql://localhost:5433/postgres",
+                                "postgres", "9090");
+                connection.setAutoCommit(false);
+                System.out.println("Opened database successfully");
+                return connection;
+        }
 
         String str = "";
         ArrayList<String> stringsFromFile = new ArrayList<>();

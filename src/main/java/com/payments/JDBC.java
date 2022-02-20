@@ -16,7 +16,7 @@ public class JDBC {
         LogManager.getLogManager().reset();
         log.setLevel(Level.ALL);
         try {
-            FileHandler fileHandler = new FileHandler("paymentLogger.log", true);
+            FileHandler fileHandler = new FileHandler("paymentLogger.log");
             //fileHandler.setFormatter();
             fileHandler.setLevel(Level.ALL);
             log.addHandler(fileHandler);
