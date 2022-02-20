@@ -23,18 +23,18 @@ public class TemplateDAO {
         //log.info("Success insertIntoTemplatesTable " + LocalDateTime.now());
     }
 
-    public void readFromTemplatesTable(Connection connection) {
+    public void readAll(Connection connection) {
         System.out.println("Templates Table");
         try (Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery("select * from templates");
+            ResultSet rs = statement.executeQuery("select id, template_name, iban, purpose, contact from templates");
             while (rs.next()) {
                 System.out.println();
-                System.out.printf("%s\t%s\t%s\t%s",
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5));
+                System.out.printf("%-10s%-15s%-35s%-15s%-10s\n",
+                        rs.getString("id"),
+                        rs.getString("template_name"),
+                        rs.getString("iban"),
+                        rs.getString("purpose"),
+                        rs.getString("contact"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

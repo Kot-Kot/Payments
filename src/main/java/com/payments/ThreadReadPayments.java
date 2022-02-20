@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class ThreadReadPayments extends Thread {
@@ -32,7 +31,7 @@ public class ThreadReadPayments extends Thread {
         try{
             startTimestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
             while(flag) {
-                payments = new ArrayList<>(new PaymentDAO().readFromPaymentsTable(connection));
+                payments = new ArrayList<>(new PaymentDAO().readWithStatusNew(connection));
                 if(payments.size() == 0) flag = false;
                 System.out.println( "payments.size()            =            " + payments.size());
                 currentTimestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
@@ -47,7 +46,7 @@ public class ThreadReadPayments extends Thread {
                     for (Payment p : payments) {
                         p.setStatus(statusGenerator());
                         System.out.println("statusGenerator  : " + p.getId() + "  "+ p.getStatus());
-                        new PaymentDAO().updatePaymentsTable(connection, p);
+                        new PaymentDAO().update(connection, p);
                     }
 //                    for (int i = 0; i<payments.size();i++){
 //                        payments.get(i).setStatus(statusGenerator1());

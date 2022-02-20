@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-02-20T20:29:12.546917300Z</date>
-  <millis>1645388952546</millis>
-  <nanos>917300</nanos>
+  <date>2022-02-20T21:42:46.392300200Z</date>
+  <millis>1645393366392</millis>
+  <nanos>300200</nanos>
   <sequence>0</sequence>
   <logger>com.payments.Main</logger>
   <level>INFO</level>

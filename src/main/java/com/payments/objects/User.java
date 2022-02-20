@@ -7,6 +7,10 @@ public class User {
     private String email;
     private String phone;
 
+    public User() {
+
+    }
+
     public User(String fio, String email, String phone) {
         this.fio = fio;
         this.email = email;
@@ -50,5 +54,14 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(fio, email, phone);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "fio='" + fio + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

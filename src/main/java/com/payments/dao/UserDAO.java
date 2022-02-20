@@ -1,11 +1,14 @@
 package com.payments.dao;
 
+import com.payments.objects.User;
+
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class UserDAO {
 
-    public void insertIntoUsersTable(Connection connection, String[] user) {
+    public void insert(Connection connection, String[] user) {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO users (fio, email, phone) VALUES (?,?,?);");
@@ -24,13 +27,15 @@ public class UserDAO {
         //log.info("Success insertIntoUserTable " + LocalDateTime.now());
     }
 
-    public void readFromUsersTable(Connection connection) {
+    public void readAll(Connection connection) {
         System.out.println("Users Table");
         try (Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery("select * from users");
+            ResultSet rs = statement.executeQuery("select fio, email, phone from users");
             while (rs.next()) {
-                System.out.printf("%s\t%s\t%s",
-                        rs.getString(1), rs.getString(2), rs.getString(3));
+                System.out.printf("%-35s%-35s%-20s\n",
+                        rs.getString("fio"),
+                        rs.getString("email"),
+                        rs.getString("phone"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 public class PaymentDAO {
-    public void insertIntoPaymentsTable(Connection connection, String[] payment) {
+    public void insert(Connection connection, String[] payment) {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO payments (template_id, card_number, p_sum, status, creation_dt, status_changed_dt) VALUES (?, ?, ?, ?, ?, ?);");
@@ -30,7 +30,7 @@ public class PaymentDAO {
         //log.info("Success insertIntoPaymentsTable " + LocalDateTime.now());
     }
 
-    synchronized public List<Payment> readFromPaymentsTable(Connection connection){
+    synchronized public List<Payment> readWithStatusNew(Connection connection){
         //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
         //Payment payment = new Payment();
@@ -61,7 +61,7 @@ public class PaymentDAO {
 
     }
 
-    synchronized public void updatePaymentsTable(Connection connection, Payment payment) {
+    synchronized public void update(Connection connection, Payment payment) {
         ArrayList<Payment> payments = new ArrayList<>();
         try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             ResultSet rs = statement.executeQuery("select * from payments");
@@ -78,6 +78,27 @@ public class PaymentDAO {
             e.printStackTrace();
         }
         System.out.println("Updated id = " + payment.getId());
+
+    }
+
+    public void readAll(Connection connection) {
+        System.out.println("Payments Table");
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery("select * from payments");
+            while (rs.next()) {
+                System.out.println();
+                System.out.printf("%-15s%-15s%-20s%-10s%-10s%-40s%-40s\n",
+                        rs.getLong(1),
+                        rs.getLong(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getTimestamp(6),
+                        rs.getTimestamp(7));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }

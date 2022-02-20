@@ -32,14 +32,20 @@ public class Main {
     }
 
     public static void main(String[] args) {
+
         Main.setupLogger();
+        UserDAO userDAO = new UserDAO();
+        TemplateDAO templateDAO = new TemplateDAO();
+        PaymentDAO paymentDAO = new PaymentDAO();
+        AddressDAO addressDAO = new AddressDAO();
+
         ArrayList<Payment> paymentList = new ArrayList<>();
         Payment payment = new Payment();
         String[] userArr = null;
         String[] billingAddressArr = null;
         String[] templateArr = null;
         String[] paymentArr = null;
-
+        Connection connection = connection();
         String str = "";
         ArrayList<String> stringsFromFile = new ArrayList<>();
         new MainDAO().createTables(connection());
@@ -51,6 +57,7 @@ public class Main {
                     //System.out.println(str);
                     stringsFromFile.add(str);
                     str = "";
+                    continue;
                 }
                 str += (char) c;
             }
@@ -64,15 +71,18 @@ public class Main {
             System.out.println(s);
             if (s.contains("REGISTRATION")) {
                 userArr = s.split("\\|");
-                new UserDAO().insertIntoUsersTable(connection(), userArr);
+                new UserDAO().insert(connection(), userArr);
+                continue;
             }
             if (s.contains("ADDRESS")) {
                 billingAddressArr = s.split("\\|");
-                new AddressDAO().insertIntoAddressTable(connection(), billingAddressArr);
+                new AddressDAO().insert(connection(), billingAddressArr);
+                continue;
             }
             if (s.contains("TEMPLATE")) {
                 templateArr = s.split("\\|");
                 new TemplateDAO().insertIntoTemplatesTable(connection(), templateArr);
+                continue;
             }
             if (s.contains("PAYMENT")) {
                 System.out.println(s);
@@ -81,13 +91,12 @@ public class Main {
                     System.out.println(s1);
                 }
                 paymentArr[4] = paymentArr[4].replaceAll("[^A-Za-z0-9]", "");
-                new PaymentDAO().insertIntoPaymentsTable(connection(), paymentArr);
+                new PaymentDAO().insert(connection(), paymentArr);
             }
 
 
 
-            new UserDAO().readFromUsersTable(connection());
-            new TemplateDAO().readFromTemplatesTable(connection());
+
             //ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
             //readPayments.start();
 
@@ -141,7 +150,10 @@ public class Main {
 
         }
 
-
+        userDAO.readAll(connection);
+        addressDAO.readAll(connection);
+        templateDAO.readAll(connection);
+        paymentDAO.readAll(connection);
     }
 
     static Connection connection() {
