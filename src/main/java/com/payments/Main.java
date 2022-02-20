@@ -16,6 +16,7 @@ public class Main {
 
         String str = "";
         ArrayList<String> stringsFromFile = new ArrayList<>();
+        JDBC.createTables();
         try (FileReader reader = new FileReader("initdata.txt")) {
             int c;
             while ((c = reader.read()) != -1) {
