@@ -14,7 +14,7 @@ public class ThreadReadPayments extends Thread {
     private Connection connection;
     private Random random = new Random();
     private boolean flag = true;
-    private PaymentDAO paymentDAO;
+    private PaymentDAO paymentDAO = new PaymentDAO();
 
     public ThreadReadPayments(String name, Connection connection){
         super(name);

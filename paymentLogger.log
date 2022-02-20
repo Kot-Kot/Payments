@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-02-20T23:17:19.794291400Z</date>
-  <millis>1645399039794</millis>
-  <nanos>291400</nanos>
+  <date>2022-02-20T23:32:44.267603500Z</date>
+  <millis>1645399964267</millis>
+  <nanos>603500</nanos>
   <sequence>0</sequence>
   <logger>com.payments.Main</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Read from init file</message>
 </record>
 <record>
-  <date>2022-02-20T23:17:19.834466600Z</date>
-  <millis>1645399039834</millis>
-  <nanos>466600</nanos>
+  <date>2022-02-20T23:32:44.307794500Z</date>
+  <millis>1645399964307</millis>
+  <nanos>794500</nanos>
   <sequence>1</sequence>
   <logger>com.payments.Main</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>Write to database</message>
 </record>
 <record>
-  <date>2022-02-20T23:17:19.839490700Z</date>
-  <millis>1645399039839</millis>
-  <nanos>490700</nanos>
+  <date>2022-02-20T23:32:44.310814900Z</date>
+  <millis>1645399964310</millis>
+  <nanos>814900</nanos>
   <sequence>2</sequence>
   <logger>com.payments.Main</logger>
   <level>INFO</level>
@@ -38,9 +38,9 @@
   <message>Write to database</message>
 </record>
 <record>
-  <date>2022-02-20T23:17:19.839490700Z</date>
-  <millis>1645399039839</millis>
-  <nanos>490700</nanos>
+  <date>2022-02-20T23:32:44.312832700Z</date>
+  <millis>1645399964312</millis>
+  <nanos>832700</nanos>
   <sequence>3</sequence>
   <logger>com.payments.Main</logger>
   <level>INFO</level>
@@ -50,9 +50,9 @@
   <message>Write to database</message>
 </record>
 <record>
-  <date>2022-02-20T23:17:19.839490700Z</date>
-  <millis>1645399039839</millis>
-  <nanos>490700</nanos>
+  <date>2022-02-20T23:32:44.312832700Z</date>
+  <millis>1645399964312</millis>
+  <nanos>832700</nanos>
   <sequence>4</sequence>
   <logger>com.payments.Main</logger>
   <level>INFO</level>
@@ -62,9 +62,9 @@
   <message>Write to database</message>
 </record>
 <record>
-  <date>2022-02-20T23:17:19.839490700Z</date>
-  <millis>1645399039839</millis>
-  <nanos>490700</nanos>
+  <date>2022-02-20T23:32:44.312832700Z</date>
+  <millis>1645399964312</millis>
+  <nanos>832700</nanos>
   <sequence>5</sequence>
   <logger>com.payments.Main</logger>
   <level>INFO</level>
@@ -72,5 +72,29 @@
   <method>main</method>
   <thread>1</thread>
   <message>Write to database</message>
+</record>
+<record>
+  <date>2022-02-20T23:32:49.522358600Z</date>
+  <millis>1645399969522</millis>
+  <nanos>358600</nanos>
+  <sequence>6</sequence>
+  <logger>com.payments.Main</logger>
+  <level>INFO</level>
+  <class>com.payments.Main</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>Change payments status</message>
+</record>
+<record>
+  <date>2022-02-20T23:32:49.542383100Z</date>
+  <millis>1645399969542</millis>
+  <nanos>383100</nanos>
+  <sequence>7</sequence>
+  <logger>com.payments.Main</logger>
+  <level>INFO</level>
+  <class>com.payments.Main</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>Read from database</message>
 </record>
 </log>

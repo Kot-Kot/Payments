@@ -94,14 +94,16 @@ public class Main {
             }
             log.log(Level.INFO, "Write to database");
         }
-        ThreadReadPayments1 readPayments = new ThreadReadPayments1("ThreadReadPayments", connection());
+        ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
         readPayments.start();
         try {
             readPayments.join();
+            log.log(Level.INFO, "Change payments status");
             userDAO.readAll2(connection);
             addressDAO.readAll(connection);
             templateDAO.readAll(connection);
             paymentDAO.readAll(connection);
+            log.log(Level.INFO, "Read from database");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
