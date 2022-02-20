@@ -42,14 +42,14 @@ public class ThreadReadPayments extends Thread {
 
                     currentTimestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
                     if (currentTimestamp - startTimestamp < 2000){
-                        for (int i = 0; i < payments.size();i++) {
-                            payments.get(i).setStatus("new");
+                        for (Payment p : payments) {
+                            p.setStatus("new");
                         }
                     }else{
-                        for (int i = 0; i < payments.size();i++) {
-                        payments.get(i).setStatus(statusGenerator());
-                        System.out.println("statusGenerator  : " + payments.get(i).getId() + "  "+ payments.get(i).getStatus());
-                        PaymentDAO.updatePaymentsTable(Main.connection(), payments.get(i));
+                        for (Payment p : payments) {
+                            p.setStatus(statusGenerator());
+                            System.out.println("statusGenerator  : " + p.getId() + "  "+ p.getStatus());
+                            PaymentDAO.updatePaymentsTable(Main.connection(), p);
                         }
                     }
 
@@ -79,19 +79,15 @@ public class ThreadReadPayments extends Thread {
 
     synchronized String statusGenerator() {
         int number = (int)(Math.random() * 3);
-        String status = null;
         switch (number) {
             case 0:
-                status = "paid";
-                break;
+                return  "paid";
             case 1:
-                status = "failed";
-                break;
+                return "failed";
             case 2:
-                status = "new";
-                break;
+                return "new";
 
-        }
-        return status;
+    }
+        return null;
     }
 }
