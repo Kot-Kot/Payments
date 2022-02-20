@@ -1,14 +1,15 @@
 package com.payments;
 
+import com.payments.dao.UserDAO;
+import com.payments.objects.Payment;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -32,6 +33,7 @@ public class Main {
             log.log(Level.SEVERE, "File logger not working" , e);
         }
     }
+
     public static void main(String[] args) {
         Main.setupLogger();
 
@@ -67,7 +69,7 @@ public class Main {
             System.out.println(s);
             if (s.contains("REGISTRATION")) {
                 userArr = s.split("\\|");
-                JDBC.insertIntoUserTable(userArr);
+                UserDAO.insertIntoUserTable(connection(), userArr);
             }
             if (s.contains("ADDRESS")) {
                 billingAddressArr = s.split("\\|");
@@ -144,6 +146,29 @@ public class Main {
         }
 
 
+    }
+
+    static Connection connection() {
+        String url = "jdbc:postgresql://localhost:5433/postgres";
+        String user = "postgres";
+        String password = "9090";
+
+        try {
+            DriverManager.registerDriver(new org.postgresql.Driver());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(url, user, password);
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return connection;
     }
 }
 

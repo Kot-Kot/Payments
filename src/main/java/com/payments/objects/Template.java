@@ -1,4 +1,4 @@
-package com.payments;
+package com.payments.objects;
 
 import java.util.Objects;
 

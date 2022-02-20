@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-02-20T15:24:16.252327900Z</date>
-  <millis>1645370656252</millis>
-  <nanos>327900</nanos>
+  <date>2022-02-20T18:07:50.263493600Z</date>
+  <millis>1645380470263</millis>
+  <nanos>493600</nanos>
   <sequence>0</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
@@ -14,147 +14,122 @@
   <message>Tables created</message>
 </record>
 <record>
-  <date>2022-02-20T15:24:16.322638500Z</date>
-  <millis>1645370656322</millis>
-  <nanos>638500</nanos>
+  <date>2022-02-20T18:07:50.430152700Z</date>
+  <millis>1645380470430</millis>
+  <nanos>152700</nanos>
   <sequence>2</sequence>
-  <logger>com.payments.JDBC</logger>
-  <level>INFO</level>
-  <class>com.payments.JDBC</class>
-  <method>insertIntoUserTable</method>
-  <thread>1</thread>
-  <message>Success insertIntoUserTable 2022-02-20T17:24:16.317633200</message>
-</record>
-<record>
-  <date>2022-02-20T15:24:16.362300Z</date>
-  <millis>1645370656362</millis>
-  <nanos>300000</nanos>
-  <sequence>3</sequence>
-  <logger>com.payments.JDBC</logger>
-  <level>INFO</level>
-  <class>com.payments.JDBC</class>
-  <method>insertIntoUserTable</method>
-  <thread>1</thread>
-  <message>Success insertIntoUserTable 2022-02-20T17:24:16.362300</message>
-</record>
-<record>
-  <date>2022-02-20T15:24:16.417573300Z</date>
-  <millis>1645370656417</millis>
-  <nanos>573300</nanos>
-  <sequence>4</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
   <class>com.payments.JDBC</class>
   <method>insertIntoAddressTable</method>
   <thread>1</thread>
-  <message>Success insertIntoAddressTable 2022-02-20T17:24:16.417523200</message>
+  <message>Success insertIntoAddressTable 2022-02-20T20:07:50.430152700</message>
 </record>
 <record>
-  <date>2022-02-20T15:24:16.473914700Z</date>
-  <millis>1645370656473</millis>
-  <nanos>914700</nanos>
-  <sequence>5</sequence>
+  <date>2022-02-20T18:07:50.505129Z</date>
+  <millis>1645380470505</millis>
+  <nanos>129000</nanos>
+  <sequence>3</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
   <class>com.payments.JDBC</class>
   <method>insertIntoTemplatesTable</method>
   <thread>1</thread>
-  <message>Success insertIntoTemplatesTable 2022-02-20T17:24:16.473914700</message>
+  <message>Success insertIntoTemplatesTable 2022-02-20T20:07:50.505129</message>
 </record>
 <record>
-  <date>2022-02-20T15:24:16.522310400Z</date>
-  <millis>1645370656522</millis>
-  <nanos>310400</nanos>
+  <date>2022-02-20T18:07:50.547353600Z</date>
+  <millis>1645380470547</millis>
+  <nanos>353600</nanos>
+  <sequence>4</sequence>
+  <logger>com.payments.JDBC</logger>
+  <level>INFO</level>
+  <class>com.payments.JDBC</class>
+  <method>insertIntoTemplatesTable</method>
+  <thread>1</thread>
+  <message>Success insertIntoTemplatesTable 2022-02-20T20:07:50.547353600</message>
+</record>
+<record>
+  <date>2022-02-20T18:07:50.597624500Z</date>
+  <millis>1645380470597</millis>
+  <nanos>624500</nanos>
+  <sequence>5</sequence>
+  <logger>com.payments.JDBC</logger>
+  <level>INFO</level>
+  <class>com.payments.JDBC</class>
+  <method>insertIntoAddressTable</method>
+  <thread>1</thread>
+  <message>Success insertIntoAddressTable 2022-02-20T20:07:50.597624500</message>
+</record>
+<record>
+  <date>2022-02-20T18:07:50.637878200Z</date>
+  <millis>1645380470637</millis>
+  <nanos>878200</nanos>
   <sequence>6</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
   <class>com.payments.JDBC</class>
   <method>insertIntoTemplatesTable</method>
   <thread>1</thread>
-  <message>Success insertIntoTemplatesTable 2022-02-20T17:24:16.522310400</message>
+  <message>Success insertIntoTemplatesTable 2022-02-20T20:07:50.637878200</message>
 </record>
 <record>
-  <date>2022-02-20T15:24:16.567644600Z</date>
-  <millis>1645370656567</millis>
-  <nanos>644600</nanos>
+  <date>2022-02-20T18:07:50.685775Z</date>
+  <millis>1645380470685</millis>
+  <nanos>775000</nanos>
   <sequence>7</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
   <class>com.payments.JDBC</class>
-  <method>insertIntoAddressTable</method>
+  <method>insertIntoTemplatesTable</method>
   <thread>1</thread>
-  <message>Success insertIntoAddressTable 2022-02-20T17:24:16.567644600</message>
+  <message>Success insertIntoTemplatesTable 2022-02-20T20:07:50.685775</message>
 </record>
 <record>
-  <date>2022-02-20T15:24:16.614963600Z</date>
-  <millis>1645370656614</millis>
-  <nanos>963600</nanos>
+  <date>2022-02-20T18:07:50.740661Z</date>
+  <millis>1645380470740</millis>
+  <nanos>661000</nanos>
   <sequence>8</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
   <class>com.payments.JDBC</class>
-  <method>insertIntoTemplatesTable</method>
+  <method>insertIntoPaymentsTable</method>
   <thread>1</thread>
-  <message>Success insertIntoTemplatesTable 2022-02-20T17:24:16.614963600</message>
+  <message>Success insertIntoPaymentsTable 2022-02-20T20:07:50.740661</message>
 </record>
 <record>
-  <date>2022-02-20T15:24:16.655235600Z</date>
-  <millis>1645370656655</millis>
-  <nanos>235600</nanos>
+  <date>2022-02-20T18:07:50.807619300Z</date>
+  <millis>1645380470807</millis>
+  <nanos>619300</nanos>
   <sequence>9</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
   <class>com.payments.JDBC</class>
-  <method>insertIntoTemplatesTable</method>
+  <method>insertIntoPaymentsTable</method>
   <thread>1</thread>
-  <message>Success insertIntoTemplatesTable 2022-02-20T17:24:16.655235600</message>
+  <message>Success insertIntoPaymentsTable 2022-02-20T20:07:50.807619300</message>
 </record>
 <record>
-  <date>2022-02-20T15:24:16.705572Z</date>
-  <millis>1645370656705</millis>
-  <nanos>572000</nanos>
+  <date>2022-02-20T18:07:50.859978500Z</date>
+  <millis>1645380470859</millis>
+  <nanos>978500</nanos>
   <sequence>10</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
   <class>com.payments.JDBC</class>
   <method>insertIntoPaymentsTable</method>
   <thread>1</thread>
-  <message>Success insertIntoPaymentsTable 2022-02-20T17:24:16.705572</message>
+  <message>Success insertIntoPaymentsTable 2022-02-20T20:07:50.859978500</message>
 </record>
 <record>
-  <date>2022-02-20T15:24:16.755945600Z</date>
-  <millis>1645370656755</millis>
-  <nanos>945600</nanos>
+  <date>2022-02-20T18:07:50.920402100Z</date>
+  <millis>1645380470920</millis>
+  <nanos>402100</nanos>
   <sequence>11</sequence>
   <logger>com.payments.JDBC</logger>
   <level>INFO</level>
   <class>com.payments.JDBC</class>
   <method>insertIntoPaymentsTable</method>
   <thread>1</thread>
-  <message>Success insertIntoPaymentsTable 2022-02-20T17:24:16.755945600</message>
+  <message>Success insertIntoPaymentsTable 2022-02-20T20:07:50.920402100</message>
 </record>
-<record>
-  <date>2022-02-20T15:24:16.807305100Z</date>
-  <millis>1645370656807</millis>
-  <nanos>305100</nanos>
-  <sequence>12</sequence>
-  <logger>com.payments.JDBC</logger>
-  <level>INFO</level>
-  <class>com.payments.JDBC</class>
-  <method>insertIntoPaymentsTable</method>
-  <thread>1</thread>
-  <message>Success insertIntoPaymentsTable 2022-02-20T17:24:16.807305100</message>
-</record>
-<record>
-  <date>2022-02-20T15:24:16.854618100Z</date>
-  <millis>1645370656854</millis>
-  <nanos>618100</nanos>
-  <sequence>13</sequence>
-  <logger>com.payments.JDBC</logger>
-  <level>INFO</level>
-  <class>com.payments.JDBC</class>
-  <method>insertIntoPaymentsTable</method>
-  <thread>1</thread>
-  <message>Success insertIntoPaymentsTable 2022-02-20T17:24:16.854618100</message>
-</record>
-</log>

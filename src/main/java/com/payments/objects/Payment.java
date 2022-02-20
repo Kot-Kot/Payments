@@ -1,4 +1,4 @@
-package com.payments;
+package com.payments.objects;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

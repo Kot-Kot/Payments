@@ -1,8 +1,8 @@
 package com.payments;
 
-import java.sql.Timestamp;
-import java.time.Duration;
-import java.time.Instant;
+import com.payments.dao.PaymentDAO;
+import com.payments.objects.Payment;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class ThreadReadPayments extends Thread {
         try{
             startTimestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
             while(flag) {
-            payments = new ArrayList<>(JDBC.readFromPaymentsTable());
+            payments = new ArrayList<>(PaymentDAO.readFromPaymentsTable(Main.connection()));
                 if(payments.size() == 0) shutdown();
             System.out.println( "payments.size()            =            " + payments.size());
 
@@ -49,7 +49,7 @@ public class ThreadReadPayments extends Thread {
                         for (int i = 0; i < payments.size();i++) {
                         payments.get(i).setStatus(statusGenerator());
                         System.out.println("statusGenerator  : " + payments.get(i).getId() + "  "+ payments.get(i).getStatus());
-                        JDBC.updatePaymentsTable(payments.get(i));
+                        PaymentDAO.updatePaymentsTable(Main.connection(), payments.get(i));
                         }
                     }
 

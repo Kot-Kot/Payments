@@ -1,5 +1,7 @@
 package com.payments;
 
+import com.payments.objects.Payment;
+
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDateTime;
