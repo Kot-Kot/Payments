@@ -88,7 +88,7 @@ public class Main {
 
 
 
-            ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments");
+            ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
             readPayments.start();
 
 
