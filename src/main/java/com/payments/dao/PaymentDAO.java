@@ -30,7 +30,7 @@ public class PaymentDAO {
         //log.info("Success insertIntoPaymentsTable " + LocalDateTime.now());
     }
 
-    synchronized public List<Payment> readWithStatusNew(Connection connection){
+    public List<Payment> readWithStatusNew(Connection connection){
         //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
         //Payment payment = new Payment();
@@ -51,7 +51,7 @@ public class PaymentDAO {
 
             }
             rs.close();
-            statement.close();
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,7 +61,7 @@ public class PaymentDAO {
 
     }
 
-    synchronized public void update(Connection connection, Payment payment) {
+    public void update(Connection connection, Payment payment) {
         ArrayList<Payment> payments = new ArrayList<>();
         try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             ResultSet rs = statement.executeQuery("select * from payments");
@@ -73,7 +73,7 @@ public class PaymentDAO {
                     rs.updateRow();}
             }
             rs.close();
-            statement.close();
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }

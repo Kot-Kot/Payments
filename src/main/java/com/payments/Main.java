@@ -22,7 +22,6 @@ public class Main {
         log.setLevel(Level.ALL);
         try {
             FileHandler fileHandler = new FileHandler("paymentLogger.log");
-            //fileHandler.setFormatter();
             fileHandler.setLevel(Level.ALL);
             log.addHandler(fileHandler);
         } catch (IOException e) {
@@ -71,17 +70,17 @@ public class Main {
             System.out.println(s);
             if (s.contains("REGISTRATION")) {
                 userArr = s.split("\\|");
-                new UserDAO().insert(connection(), userArr);
+                userDAO.insert(connection, userArr);
                 continue;
             }
             if (s.contains("ADDRESS")) {
                 billingAddressArr = s.split("\\|");
-                new AddressDAO().insert(connection(), billingAddressArr);
+                addressDAO.insert(connection, billingAddressArr);
                 continue;
             }
             if (s.contains("TEMPLATE")) {
                 templateArr = s.split("\\|");
-                new TemplateDAO().insertIntoTemplatesTable(connection(), templateArr);
+                templateDAO.insertIntoTemplatesTable(connection, templateArr);
                 continue;
             }
             if (s.contains("PAYMENT")) {
@@ -91,82 +90,33 @@ public class Main {
                     System.out.println(s1);
                 }
                 paymentArr[4] = paymentArr[4].replaceAll("[^A-Za-z0-9]", "");
-                new PaymentDAO().insert(connection(), paymentArr);
+                paymentDAO.insert(connection, paymentArr);
             }
-
-
-
-
-            //ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
-            //readPayments.start();
-
-
-
-//        myThread.start();
-
-//            paymentList = new ArrayList<>(JDBC.readFromPaymentsTable());
-//
-//            for (int i = 0; i < paymentList.size();i++)
-//            {
-//                System.out.println(paymentList.get(i));
-//            }
-
-
-
-
-//            if (s.contains("PAYMENT")){
-//                System.out.println(s);
-//                paymentArr = s.split("\\|");
-//                for (String s1 : paymentArr){
-//                    System.out.println(s1);
-//                }
-//                paymentArr[5] = paymentArr[5].replaceAll("[^A-Za-z0-9]", "");
-//                payment = new Payment(Integer.valueOf(paymentArr[1]), Integer.valueOf(paymentArr[2]), paymentArr[3], Double.valueOf(paymentArr[4]), paymentArr[5],
-//                        LocalDateTime.now(),
-//                        LocalDateTime.now());
-//                paymentList.add(payment);
-//
-//
-//                String sqlPayment = "INSERT INTO payments (id, template_id, card_number, p_sum, status, creation_dt, status_changed_dt)"
-//
-////                String sqlPayment = "INSERT INTO payments (id, template_id, card_number, p_sum, status, creation_dt, status_changed_dt)"
-////                        + "VALUES ('"
-////                        + paymentArr[1] + "','"
-////                        + paymentArr[2] + "','"
-////                        + paymentArr[3] + "','"
-////                        + paymentArr[4] + "','"
-////                        + paymentArr[5] + "','"
-////                        + new Timestamp(System.currentTimeMillis()) + "','"
-////                        + new Timestamp(System.currentTimeMillis()) + "');";
-//                ConnectionJDBC.insertIntoTable(sqlPayment);
-//            }
-//        }
-//        for (int i = 0; i < paymentList.size();i++)
-//        {
-//            System.out.println(paymentList.get(i));
-//        }
-//        MyThread myThread = new MyThread("MyThread", paymentList);
-//        myThread.start();
-
+            log.log(Level.INFO, "Write to database");
+        }
+        ThreadReadPayments1 readPayments = new ThreadReadPayments1("ThreadReadPayments", connection());
+        readPayments.start();
+        try {
+            readPayments.join();
+            userDAO.readAll2(connection);
+            addressDAO.readAll(connection);
+            templateDAO.readAll(connection);
+            paymentDAO.readAll(connection);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-        userDAO.readAll(connection);
-        addressDAO.readAll(connection);
-        templateDAO.readAll(connection);
-        paymentDAO.readAll(connection);
     }
 
     static Connection connection() {
         String url = "jdbc:postgresql://localhost:5433/postgres";
         String user = "postgres";
         String password = "9090";
-
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);
@@ -174,9 +124,7 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-        return connection;
+       return connection;
     }
 }
 
