@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -65,7 +64,7 @@ public class Main {
             System.out.println(s);
             if (s.contains("REGISTRATION")) {
                 userArr = s.split("\\|");
-                new UserDAO().insertIntoUserTable(connection(), userArr);
+                new UserDAO().insertIntoUsersTable(connection(), userArr);
             }
             if (s.contains("ADDRESS")) {
                 billingAddressArr = s.split("\\|");
