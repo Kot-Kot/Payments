@@ -1,5 +1,8 @@
 package com.payments;
 
+import com.payments.dao.AddressDAO;
+import com.payments.dao.PaymentDAO;
+import com.payments.dao.TemplateDAO;
 import com.payments.dao.UserDAO;
 import com.payments.objects.Payment;
 
@@ -73,11 +76,11 @@ public class Main {
             }
             if (s.contains("ADDRESS")) {
                 billingAddressArr = s.split("\\|");
-                JDBC.insertIntoAddressTable(billingAddressArr);
+                AddressDAO.insertIntoAddressTable(connection(), billingAddressArr);
             }
             if (s.contains("TEMPLATE")) {
                 templateArr = s.split("\\|");
-                JDBC.insertIntoTemplatesTable(templateArr);
+                TemplateDAO.insertIntoTemplatesTable(connection(), templateArr);
             }
             if (s.contains("PAYMENT")) {
                 System.out.println(s);
@@ -86,7 +89,7 @@ public class Main {
                     System.out.println(s1);
                 }
                 paymentArr[4] = paymentArr[4].replaceAll("[^A-Za-z0-9]", "");
-                JDBC.insertIntoPaymentsTable(paymentArr);
+                PaymentDAO.insertIntoPaymentsTable(connection(), paymentArr);
             }
 
 
