@@ -62,11 +62,8 @@ public class PaymentDAO {
     }
 
     synchronized public void updatePaymentsTable(Connection connection, Payment payment) {
-        //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
-        //Payment payment = new Payment();
-        try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_UPDATABLE)) {
+        try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             ResultSet rs = statement.executeQuery("select * from payments");
 
             while (rs.next()) {
