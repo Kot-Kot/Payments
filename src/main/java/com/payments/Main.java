@@ -5,10 +5,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class Main {
+    private final static Logger log = Logger.getLogger(Main.class.getName());
 
+    private static void setupLogger(){
+        LogManager.getLogManager().reset();
+        log.setLevel(Level.ALL);
+        try {
+            FileHandler fileHandler = new FileHandler("paymentLogger.log", true);
+            //fileHandler.setFormatter();
+            fileHandler.setLevel(Level.ALL);
+            log.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.log(Level.SEVERE, "File logger not working" , e);
+        }
+    }
     public static void main(String[] args) {
+        Main.setupLogger();
+
+
         ArrayList<Payment> paymentList = new ArrayList<>();
         Payment payment = new Payment();
         String[] userArr = null;
@@ -19,6 +40,7 @@ public class Main {
         String str = "";
         ArrayList<String> stringsFromFile = new ArrayList<>();
         JDBC.createTables();
+        log.log(Level.INFO, "Read from init file");
         try (FileReader reader = new FileReader("initdata.txt")) {
             int c;
             while ((c = reader.read()) != -1) {
@@ -31,6 +53,7 @@ public class Main {
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            log.log(Level.SEVERE, "Exception:", e);
         }
         //System.out.println(s);
         //String[] words = s.split("\\|");

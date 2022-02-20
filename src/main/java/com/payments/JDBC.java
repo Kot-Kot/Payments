@@ -4,15 +4,30 @@ import java.io.*;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class JDBC {
-    private static final Logger logger = Logger.getLogger(JDBC.class.getName());
+    private static final Logger log = Logger.getLogger(JDBC.class.getName());
+    private static void setupLogger(){
+        LogManager.getLogManager().reset();
+        log.setLevel(Level.ALL);
+        try {
+            FileHandler fileHandler = new FileHandler("paymentLogger.log", true);
+            //fileHandler.setFormatter();
+            fileHandler.setLevel(Level.ALL);
+            log.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.log(Level.SEVERE, "File logger not working" , e);
+        }
+    }
+
     public static void createTables() {
+        JDBC.setupLogger();
         String url = "jdbc:postgresql://localhost:5433/postgres";
         String user = "postgres";
         String password = "9090";
@@ -53,10 +68,7 @@ public class JDBC {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
-
+        log.log(Level.INFO, "Tables created" );
     }
 
 
@@ -143,7 +155,7 @@ public class JDBC {
             System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        logger.info("Success insertIntoUserTable " + LocalDateTime.now());
+        log.info("Success insertIntoUserTable " + LocalDateTime.now());
     }
 
     public static void insertIntoAddressTable(String[] address) {
@@ -171,7 +183,7 @@ public class JDBC {
             System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        logger.info("Success insertIntoAddressTable " + LocalDateTime.now());
+        log.info("Success insertIntoAddressTable " + LocalDateTime.now());
     }
 
     public static void insertIntoTemplatesTable(String[] template) {
@@ -202,7 +214,7 @@ public class JDBC {
             System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        logger.info("Success insertIntoTemplatesTable " + LocalDateTime.now());
+        log.info("Success insertIntoTemplatesTable " + LocalDateTime.now());
     }
 
     public static void insertIntoPaymentsTable(String[] payment) {
@@ -232,11 +244,11 @@ public class JDBC {
             connection.commit();
             connection.close();
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Exception: ", e);
+            log.log(Level.SEVERE, "Exception: ", e);
             System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-       logger.info("Success insertIntoPaymentsTable " + LocalDateTime.now());
+       log.info("Success insertIntoPaymentsTable " + LocalDateTime.now());
     }
 
     synchronized public static List<Payment> readFromPaymentsTable(){
