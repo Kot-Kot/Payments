@@ -35,15 +35,15 @@ public class Main {
             System.out.println(s);
             if (s.contains("REGISTRATION")) {
                 userArr = s.split("\\|");
-                ConnectionJDBC.insertIntoUserTable(userArr);
+                JDBC.insertIntoUserTable(userArr);
             }
             if (s.contains("ADDRESS")) {
                 billingAddressArr = s.split("\\|");
-                ConnectionJDBC.insertIntoAddressTable(billingAddressArr);
+                JDBC.insertIntoAddressTable(billingAddressArr);
             }
             if (s.contains("TEMPLATE")) {
                 templateArr = s.split("\\|");
-                ConnectionJDBC.insertIntoTemplatesTable(templateArr);
+                JDBC.insertIntoTemplatesTable(templateArr);
             }
             if (s.contains("PAYMENT")) {
                 System.out.println(s);
@@ -52,7 +52,7 @@ public class Main {
                     System.out.println(s1);
                 }
                 paymentArr[4] = paymentArr[4].replaceAll("[^A-Za-z0-9]", "");
-                ConnectionJDBC.insertIntoPaymentsTable(paymentArr);
+                JDBC.insertIntoPaymentsTable(paymentArr);
             }
 
 //            if (s.contains("PAYMENT")){

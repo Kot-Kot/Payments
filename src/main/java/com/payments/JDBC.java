@@ -1,17 +1,20 @@
 package com.payments;
 
+import java.io.*;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ConnectionJDBC {
-    private static final Logger logger = Logger.getLogger(ConnectionJDBC.class.getName());
-    public static void connection() {
+public class JDBC {
+    private static final Logger logger = Logger.getLogger(JDBC.class.getName());
+    public static void createTables() {
         String url = "jdbc:postgresql://localhost:5433/postgres";
         String user = "postgres";
         String password = "9090";
+        String s = new String();
+        StringBuffer sb = new StringBuffer();
+        FileReader fr = null;
         //Statement statement = null;
         //Connection connection = null;
 
@@ -21,15 +24,28 @@ public class ConnectionJDBC {
             e.printStackTrace();
         }
 
+
+        try {
+            fr = new FileReader(new File("sql.sql"));
+            BufferedReader br = new BufferedReader(fr);
+
+
+            while((s = br.readLine()) != null)
+            {
+                sb.append(s);
+            }
+            br.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         try (Connection connection = DriverManager.getConnection(url, user, password);
              Statement statement = connection.createStatement()) {
-
-            ResultSet rs = statement.executeQuery("select * from phonebook");
-
-            while (rs.next()) {
-                System.out.printf("%d\t%s\t%s",
-                        rs.getLong(1), rs.getString(2), rs.getString(3));
-            }
+            statement.executeUpdate(String.valueOf(sb));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -2,13 +2,13 @@ package com.payments;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 public class MainMyThreadTest1 {
     public static void main(String[] args) {
+
+        JDBC.createTables();
 
         HashMap<LocalDateTime, String> hashMap = new HashMap<>();
         for (int i = 0; i < 5; i++) {
