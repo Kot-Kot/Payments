@@ -36,7 +36,6 @@ public class MainDAO {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(String.valueOf(sb));
             connection.commit();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

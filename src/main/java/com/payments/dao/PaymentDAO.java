@@ -22,8 +22,7 @@ public class PaymentDAO {
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.commit();
-            connection.close();
-        } catch (Exception e) {
+       } catch (Exception e) {
             //log.log(Level.SEVERE, "Exception: ", e);
             System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
@@ -53,7 +52,6 @@ public class PaymentDAO {
             }
             rs.close();
             statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,7 +81,6 @@ public class PaymentDAO {
             }
             rs.close();
             statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

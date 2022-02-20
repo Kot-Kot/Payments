@@ -20,7 +20,6 @@ public class UserDAO {
 
             preparedStatement.close();
             connection.commit();
-            connection.close();
         } catch (Exception e) {
             System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
