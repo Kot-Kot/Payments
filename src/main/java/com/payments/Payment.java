@@ -8,11 +8,6 @@ public class Payment {
     private long templateId;
     private String cardNumber;
     private double sum;
-//    private enum status {
-////        NEW,
-////        PAID,
-////        FAILED
-////    };
     private String status;
     private LocalDateTime creationDateTime;
     private LocalDateTime statusChangedDateTime;
@@ -66,7 +61,7 @@ public class Payment {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -74,7 +69,7 @@ public class Payment {
         return templateId;
     }
 
-    public void setTemplateId(int templateId) {
+    public void setTemplateId(long templateId) {
         this.templateId = templateId;
     }
 

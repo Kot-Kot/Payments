@@ -56,6 +56,16 @@ public class Main {
                 JDBC.insertIntoPaymentsTable(paymentArr);
             }
 
+            JDBC.readFromPaymentsTable2();
+            System.out.println("paymentList.size()  = " + paymentList.size());
+//            for (int i = 0; i < paymentList.size();i++)
+//            {
+//                System.out.println(paymentList.get(i));
+//            }
+
+
+
+
 //            if (s.contains("PAYMENT")){
 //                System.out.println(s);
 //                paymentArr = s.split("\\|");
