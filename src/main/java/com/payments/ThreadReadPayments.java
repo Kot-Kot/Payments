@@ -28,7 +28,7 @@ public class ThreadReadPayments extends Thread {
         try{
             startTimestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
             while(flag) {
-            payments = new ArrayList<>(PaymentDAO.readFromPaymentsTable(Main.connection()));
+            payments = new ArrayList<>(new PaymentDAO().readFromPaymentsTable(Main.connection()));
                 if(payments.size() == 0) shutdown();
             System.out.println( "payments.size()            =            " + payments.size());
 
@@ -49,7 +49,7 @@ public class ThreadReadPayments extends Thread {
                         for (Payment p : payments) {
                             p.setStatus(statusGenerator());
                             System.out.println("statusGenerator  : " + p.getId() + "  "+ p.getStatus());
-                            PaymentDAO.updatePaymentsTable(Main.connection(), p);
+                            new PaymentDAO().updatePaymentsTable(Main.connection(), p);
                         }
                     }
 

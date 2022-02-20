@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 public class PaymentDAO {
-    public static void insertIntoPaymentsTable(Connection connection, String[] payment) {
+    public void insertIntoPaymentsTable(Connection connection, String[] payment) {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO payments (template_id, card_number, p_sum, status, creation_dt, status_changed_dt) VALUES (?, ?, ?, ?, ?, ?);");
@@ -31,7 +31,7 @@ public class PaymentDAO {
         //log.info("Success insertIntoPaymentsTable " + LocalDateTime.now());
     }
 
-    synchronized public static List<Payment> readFromPaymentsTable(Connection connection){
+    public synchronized static List<Payment> readFromPaymentsTable(Connection connection){
         //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
         //Payment payment = new Payment();
@@ -67,7 +67,7 @@ public class PaymentDAO {
 
     }
 
-    synchronized public static void updatePaymentsTable(Connection connection, Payment payment) {
+    public synchronized void updatePaymentsTable(Connection connection, Payment payment) {
         //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
         //Payment payment = new Payment();

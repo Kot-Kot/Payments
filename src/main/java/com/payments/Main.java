@@ -72,15 +72,15 @@ public class Main {
             System.out.println(s);
             if (s.contains("REGISTRATION")) {
                 userArr = s.split("\\|");
-                UserDAO.insertIntoUserTable(connection(), userArr);
+                new UserDAO().insertIntoUserTable(connection(), userArr);
             }
             if (s.contains("ADDRESS")) {
                 billingAddressArr = s.split("\\|");
-                AddressDAO.insertIntoAddressTable(connection(), billingAddressArr);
+                new AddressDAO().insertIntoAddressTable(connection(), billingAddressArr);
             }
             if (s.contains("TEMPLATE")) {
                 templateArr = s.split("\\|");
-                TemplateDAO.insertIntoTemplatesTable(connection(), templateArr);
+                new TemplateDAO().insertIntoTemplatesTable(connection(), templateArr);
             }
             if (s.contains("PAYMENT")) {
                 System.out.println(s);
@@ -89,7 +89,7 @@ public class Main {
                     System.out.println(s1);
                 }
                 paymentArr[4] = paymentArr[4].replaceAll("[^A-Za-z0-9]", "");
-                PaymentDAO.insertIntoPaymentsTable(connection(), paymentArr);
+                new PaymentDAO().insertIntoPaymentsTable(connection(), paymentArr);
             }
 
 

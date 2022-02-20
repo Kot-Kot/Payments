@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 
 public class AddressDAO {
-    public static void insertIntoAddressTable(Connection connection, String[] address) {
+    public void insertIntoAddressTable(Connection connection, String[] address) {
 
         PreparedStatement preparedStatement = null;
         try {

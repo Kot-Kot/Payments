@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 
 public class TemplateDAO {
-    public static void insertIntoTemplatesTable(Connection connection, String[] template) {
+    public void insertIntoTemplatesTable(Connection connection, String[] template) {
 
         PreparedStatement preparedStatement = null;
         try {

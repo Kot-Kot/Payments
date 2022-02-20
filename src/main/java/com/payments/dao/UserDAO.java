@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class UserDAO {
 
-    public static void insertIntoUserTable(Connection connection, String[] user) {
+    public void insertIntoUserTable(Connection connection, String[] user) {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO users (fio, email, phone) VALUES (?,?,?);");
