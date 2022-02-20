@@ -1,9 +1,6 @@
 package com.payments;
 
-import com.payments.dao.AddressDAO;
-import com.payments.dao.PaymentDAO;
-import com.payments.dao.TemplateDAO;
-import com.payments.dao.UserDAO;
+import com.payments.dao.*;
 import com.payments.objects.Payment;
 
 import java.io.FileReader;
@@ -50,7 +47,7 @@ public class Main {
 
         String str = "";
         ArrayList<String> stringsFromFile = new ArrayList<>();
-        JDBC.createTables();
+        new MainDAO().createTables(connection());
         log.log(Level.INFO, "Read from init file");
         try (FileReader reader = new FileReader("initdata.txt")) {
             int c;

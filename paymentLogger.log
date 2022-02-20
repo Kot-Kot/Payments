@@ -2,14 +2,14 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-02-20T18:32:24.269478500Z</date>
-  <millis>1645381944269</millis>
-  <nanos>478500</nanos>
+  <date>2022-02-20T18:50:13.457543600Z</date>
+  <millis>1645383013457</millis>
+  <nanos>543600</nanos>
   <sequence>0</sequence>
-  <logger>com.payments.JDBC</logger>
+  <logger>com.payments.Main</logger>
   <level>INFO</level>
-  <class>com.payments.JDBC</class>
-  <method>createTables</method>
+  <class>com.payments.Main</class>
+  <method>main</method>
   <thread>1</thread>
-  <message>Tables created</message>
+  <message>Read from init file</message>
 </record>

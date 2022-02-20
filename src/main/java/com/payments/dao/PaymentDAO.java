@@ -35,12 +35,8 @@ public class PaymentDAO {
         //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
         //Payment payment = new Payment();
-
-
         try (Statement statement = connection.createStatement()) {
-
-            ResultSet rs = statement.executeQuery("select * from payments");
-
+            ResultSet rs = statement.executeQuery("select id, template_id, card_number, p_sum, status, creation_dt, status_changed_dt  from payments");
             while (rs.next()) {
                 Payment payment = new Payment();
                 payment.setId(rs.getLong(1));
