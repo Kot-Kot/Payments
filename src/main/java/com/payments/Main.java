@@ -3,6 +3,8 @@ package com.payments;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
 
@@ -56,8 +58,18 @@ public class Main {
                 JDBC.insertIntoPaymentsTable(paymentArr);
             }
 
-            JDBC.readFromPaymentsTable2();
-            System.out.println("paymentList.size()  = " + paymentList.size());
+
+
+
+            ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments");
+            readPayments.start();
+
+
+
+//        myThread.start();
+
+//            paymentList = new ArrayList<>(JDBC.readFromPaymentsTable());
+//
 //            for (int i = 0; i < paymentList.size();i++)
 //            {
 //                System.out.println(paymentList.get(i));

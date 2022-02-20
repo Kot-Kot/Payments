@@ -239,10 +239,10 @@ public class JDBC {
        logger.info("Success insertIntoPaymentsTable " + LocalDateTime.now());
     }
 
-    public static List<Payment> readFromPaymentsTable(){
-
+    synchronized public static List<Payment> readFromPaymentsTable(){
+        //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
-        Payment payment = new Payment();
+        //Payment payment = new Payment();
         String url = "jdbc:postgresql://localhost:5433/postgres";
         String user = "postgres";
         String password = "9090";
@@ -259,16 +259,7 @@ public class JDBC {
             ResultSet rs = statement.executeQuery("select * from payments");
 
             while (rs.next()) {
-//                System.out.println();
-//                System.out.printf("%d\t%d\t%s\t%s\t%s\t%s\t%s",
-//                        rs.getLong(1),
-//                        rs.getLong(2),
-//                        rs.getString(3),
-//                        rs.getDouble(4),
-//                        rs.getString(5),
-//                        rs.getTimestamp(6),
-//                        rs.getTimestamp(7));
-
+                Payment payment = new Payment();
                 payment.setId(rs.getLong(1));
                 payment.setTemplateId(rs.getLong(2));
                 payment.setCardNumber(rs.getString(3));
@@ -276,7 +267,10 @@ public class JDBC {
                 payment.setStatus(rs.getString(5));
                 payment.setCreationDateTime(rs.getTimestamp(6).toLocalDateTime());
                 payment.setStatusChangedDateTime(rs.getTimestamp(7).toLocalDateTime());
-                payments.add(payment);
+                if (payment.getStatus().equals("new")){
+                    payments.add(payment);
+                }
+
             }
             rs.close();
             statement.close();
@@ -284,45 +278,52 @@ public class JDBC {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("payments.size() jdbc = " + payments.size());
+        System.out.println("Return payments.size() from jdbc = " + payments.size());
+        System.out.println();
         return payments;
 
     }
-    public static List<Payment> readFromPaymentsTable2(){
-        ArrayList<Payment> payments = new ArrayList<>();
-        Payment payment = new Payment();
-        Connection connection = null;
-        Statement statement = null;
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5433/postgres",
-                            "postgres", "9090");
-            connection.setAutoCommit(false);
-            System.out.println("Opened database successfully");
 
-            statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery( "SELECT * FROM payments;" );
-            while ( rs.next() ) {
-                payment.setId(rs.getLong(1));
-                payment.setTemplateId(rs.getLong(2));
-                payment.setCardNumber(rs.getString(3));
-                payment.setSum(rs.getDouble(4));
-                payment.setStatus(rs.getString(5));
-                payment.setCreationDateTime(rs.getTimestamp(6).toLocalDateTime());
-                payment.setStatusChangedDateTime(rs.getTimestamp(7).toLocalDateTime());
-                payments.add(payment);
+
+    synchronized public static void updatePaymentsTable(Payment payment) {
+        //Set<Payment> payments = new HashSet<>();
+        ArrayList<Payment> payments = new ArrayList<>();
+        //Payment payment = new Payment();
+        String url = "jdbc:postgresql://localhost:5433/postgres";
+        String user = "postgres";
+        String password = "9090";
+
+        try {
+            DriverManager.registerDriver(new org.postgresql.Driver());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                     ResultSet.CONCUR_UPDATABLE)) {
+
+
+            ResultSet rs = statement.executeQuery("select * from payments");
+
+            while (rs.next()) {
+                if (rs.getLong(1) == payment.getId()){
+                    rs.updateString("status", payment.getStatus());
+                    rs.updateTimestamp("status_changed_dt", Timestamp.valueOf(LocalDateTime.now()));
+                    rs.updateRow();}
+//                }else if (rs.getLong(1) == payment.getId() || payment.getStatus().equals("failed")){
+//                    rs.deleteRow();
+//                }
+
             }
             rs.close();
             statement.close();
             connection.close();
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-            System.exit(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        System.out.println("Operation done successfully");
-        System.out.println("payments.size() jdbc = " + payments.size());
-        return payments;
+        System.out.println("Updated id = " + payment.getId());
+
     }
 }
 
