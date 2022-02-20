@@ -8,7 +8,7 @@ import java.util.Map;
 public class MainMyThreadTest1 {
     public static void main(String[] args) {
 
-        JDBC.createTables();
+        //JDBC.createTables();
 
         HashMap<LocalDateTime, String> hashMap = new HashMap<>();
         for (int i = 0; i < 5; i++) {
@@ -27,7 +27,7 @@ public class MainMyThreadTest1 {
         for(Map.Entry<LocalDateTime, String> item : hashMap.entrySet()){
             System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue());
         }
-        new MyThreadTest1("T1", hashMap).start();
+        //new MyThreadTest1("T1", hashMap).start();
         //new MyThreadTest2("T2", hashMap).start();
         //StatusGenerator newThread = new StatusGenerator("StatusGenerator");
         //newThread.start();

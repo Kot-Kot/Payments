@@ -24,13 +24,13 @@ public class PaymentDAO {
             connection.commit();
        } catch (Exception e) {
             //log.log(Level.SEVERE, "Exception: ", e);
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+            System.out.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
         //log.info("Success insertIntoPaymentsTable " + LocalDateTime.now());
     }
 
-    public synchronized static List<Payment> readFromPaymentsTable(Connection connection){
+    synchronized public List<Payment> readFromPaymentsTable(Connection connection){
         //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
         //Payment payment = new Payment();
@@ -38,13 +38,13 @@ public class PaymentDAO {
             ResultSet rs = statement.executeQuery("select id, template_id, card_number, p_sum, status, creation_dt, status_changed_dt  from payments");
             while (rs.next()) {
                 Payment payment = new Payment();
-                payment.setId(rs.getLong(1));
-                payment.setTemplateId(rs.getLong(2));
-                payment.setCardNumber(rs.getString(3));
-                payment.setSum(rs.getDouble(4));
-                payment.setStatus(rs.getString(5));
-                payment.setCreationDateTime(rs.getTimestamp(6).toLocalDateTime());
-                payment.setStatusChangedDateTime(rs.getTimestamp(7).toLocalDateTime());
+                payment.setId(rs.getLong("id"));
+                payment.setTemplateId(rs.getLong("template_id"));
+                payment.setCardNumber(rs.getString("card_number"));
+                payment.setSum(rs.getDouble("p_sum"));
+                payment.setStatus(rs.getString("status"));
+                payment.setCreationDateTime(rs.getTimestamp("creation_dt").toLocalDateTime());
+                payment.setStatusChangedDateTime(rs.getTimestamp("status_changed_dt").toLocalDateTime());
                 if (payment.getStatus().equals("new")){
                     payments.add(payment);
                 }
@@ -61,12 +61,12 @@ public class PaymentDAO {
 
     }
 
-    public synchronized void updatePaymentsTable(Connection connection, Payment payment) {
+    synchronized public void updatePaymentsTable(Connection connection, Payment payment) {
         //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
         //Payment payment = new Payment();
         try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                     ResultSet.CONCUR_UPDATABLE)) {
+                ResultSet.CONCUR_UPDATABLE)) {
             ResultSet rs = statement.executeQuery("select * from payments");
 
             while (rs.next()) {
@@ -74,10 +74,6 @@ public class PaymentDAO {
                     rs.updateString("status", payment.getStatus());
                     rs.updateTimestamp("status_changed_dt", Timestamp.valueOf(LocalDateTime.now()));
                     rs.updateRow();}
-//                }else if (rs.getLong(1) == payment.getId() || payment.getStatus().equals("failed")){
-//                    rs.deleteRow();
-//                }
-
             }
             rs.close();
             statement.close();

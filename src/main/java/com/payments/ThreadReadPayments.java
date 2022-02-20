@@ -34,25 +34,22 @@ public class ThreadReadPayments extends Thread {
                 System.out.println( "payments.size()            =            " + payments.size());
                 currentTimestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
                 if (currentTimestamp - startTimestamp < 2000){
-                    for (Payment p : payments) {
-                        p.setStatus("new");
-                    }
-//                    Iterator<Payment> iterator = payments.iterator();
-//                    while(iterator.hasNext()){
-//                        iterator.next().setStatus("new");
+//                    for (Payment p : payments) {
+//                        p.setStatus("new");
 //                    }
+                    for (int i = 0; i<payments.size();i++){
+                        payments.get(i).setStatus("new");
+                    }
                 }else{
-                    for (Payment p : payments) {
-                        p.setStatus(statusGenerator());
-                        System.out.println("statusGenerator  : " + p.getId() + "  "+ p.getStatus());
-                        new PaymentDAO().updatePaymentsTable(Main.connection(), p);
-                    }
-//                    Iterator<Payment> iterator = payments.iterator();
-//                    while(iterator.hasNext()){
-//                        iterator.next().setStatus(statusGenerator());
-//                        System.out.println("statusGenerator  : " + iterator.next().getId() + "  "+ p.getStatus());
-//                        new PaymentDAO().updatePaymentsTable(Main.connection(), iterator.next());
+//                    for (Payment p : payments) {
+//                        p.setStatus(statusGenerator());
+//                        System.out.println("statusGenerator  : " + p.getId() + "  "+ p.getStatus());
+//                        new PaymentDAO().updatePaymentsTable(Main.connection(), p);
 //                    }
+                    for (int i = 0; i<payments.size();i++){
+                        payments.get(i).setStatus(statusGenerator1());
+                        new PaymentDAO().updatePaymentsTable(Main.connection(), payments.get(i));
+                    }
                 }
 
                 Thread.sleep(1000);
@@ -91,5 +88,23 @@ public class ThreadReadPayments extends Thread {
 
     }
         return null;
+    }
+
+    synchronized String statusGenerator1() {
+        int number = (int)(Math.random() * 3);
+        String string = "null";
+        switch (number) {
+            case 0:
+                string = "paid";
+                break;
+            case 1:
+                string = "failed";
+                break;
+            case 2:
+                string = "new";
+                break;
+
+        }
+        return string;
     }
 }

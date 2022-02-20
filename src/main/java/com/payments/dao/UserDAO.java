@@ -21,7 +21,7 @@ public class UserDAO {
             preparedStatement.close();
             connection.commit();
         } catch (Exception e) {
-            System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+            System.out.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
         //log.info("Success insertIntoUserTable " + LocalDateTime.now());

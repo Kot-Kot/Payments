@@ -18,8 +18,6 @@ import java.util.logging.Logger;
 public class Main {
     private final static Logger log = Logger.getLogger(Main.class.getName());
 
-
-
     private static void setupLogger(){
         LogManager.getLogManager().reset();
         log.setLevel(Level.ALL);
@@ -36,8 +34,6 @@ public class Main {
 
     public static void main(String[] args) {
         Main.setupLogger();
-
-
         ArrayList<Payment> paymentList = new ArrayList<>();
         Payment payment = new Payment();
         String[] userArr = null;
@@ -48,7 +44,7 @@ public class Main {
         String str = "";
         ArrayList<String> stringsFromFile = new ArrayList<>();
         new MainDAO().createTables(connection());
-        log.log(Level.INFO, "Read from init file");
+
         try (FileReader reader = new FileReader("initdata.txt")) {
             int c;
             while ((c = reader.read()) != -1) {
@@ -59,12 +55,12 @@ public class Main {
                 }
                 str += (char) c;
             }
+            log.log(Level.INFO, "Read from init file");
         } catch (IOException e) {
             System.out.println(e.getMessage());
             log.log(Level.SEVERE, "Exception:", e);
         }
-        //System.out.println(s);
-        //String[] words = s.split("\\|");
+
         for (String s : stringsFromFile) {
             System.out.println(s);
             if (s.contains("REGISTRATION")) {
