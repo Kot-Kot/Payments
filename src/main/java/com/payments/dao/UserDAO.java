@@ -1,13 +1,16 @@
 package com.payments.dao;
 
+import com.payments.Main;
 import com.payments.objects.User;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserDAO {
-
+    private static final Logger LOG = Logger.getLogger(Main.class.getSimpleName());
     public void insert(Connection connection, String[] user) {
         PreparedStatement preparedStatement;
         try {
@@ -24,11 +27,11 @@ public class UserDAO {
             System.out.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        //log.info("Success insertIntoUserTable " + LocalDateTime.now());
+        LOG.log(Level.INFO, "Success insert into users table");
     }
 
 
-    public void readAll2(Connection connection) {
+    public void readAll(Connection connection) {
         System.out.println();
         System.out.println("Users Table");
         try (Statement statement = connection.createStatement()) {
@@ -42,6 +45,6 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        LOG.log(Level.INFO, "Success readAll from users table");
     }
 }

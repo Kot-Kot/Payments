@@ -9,30 +9,35 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+import java.util.Date;
+import java.util.logging.*;
 
 public class Main {
-    private final static Logger log = Logger.getLogger(Main.class.getName());
+    private static Logger LOG = Logger.getLogger(Main.class.getName());
 
-    private static void setupLogger(){
-        LogManager.getLogManager().reset();
-        log.setLevel(Level.ALL);
+    static {
+        LOG = Logger.getLogger(Main.class.getSimpleName());
         try {
             FileHandler fileHandler = new FileHandler("paymentLogger.log");
             fileHandler.setLevel(Level.ALL);
-            log.addHandler(fileHandler);
+            fileHandler.setFormatter(new SimpleFormatter() {
+                private static final String format = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
+
+                @Override
+                public synchronized String format(LogRecord lr) {
+                    return String.format(format,
+                            new Date(lr.getMillis()),
+                            lr.getLevel().getLocalizedName(),
+                            lr.getMessage()
+                    );
+                }});
+            LOG.addHandler(fileHandler);
         } catch (IOException e) {
             e.printStackTrace();
-            log.log(Level.SEVERE, "File logger not working" , e);
         }
     }
 
     public static void main(String[] args) {
-
-        Main.setupLogger();
         UserDAO userDAO = new UserDAO();
         TemplateDAO templateDAO = new TemplateDAO();
         PaymentDAO paymentDAO = new PaymentDAO();
@@ -60,10 +65,10 @@ public class Main {
                 }
                 str += (char) c;
             }
-            log.log(Level.INFO, "Read from init file");
+            LOG.log(Level.INFO, "Read from init file");
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            log.log(Level.SEVERE, "Exception:", e);
+            LOG.log(Level.SEVERE, "Exception:", e);
         }
 
         for (String s : stringsFromFile) {
@@ -80,7 +85,7 @@ public class Main {
             }
             if (s.contains("TEMPLATE")) {
                 templateArr = s.split("\\|");
-                templateDAO.insertIntoTemplatesTable(connection, templateArr);
+                templateDAO.insert(connection, templateArr);
                 continue;
             }
             if (s.contains("PAYMENT")) {
@@ -94,17 +99,17 @@ public class Main {
             }
 
         }
-        log.log(Level.INFO, "Write to database");
+        LOG.log(Level.INFO, "Write to database");
         ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
         readPayments.start();
         try {
             readPayments.join();
-            log.log(Level.INFO, "Change payments status");
-            userDAO.readAll2(connection);
+            LOG.log(Level.INFO, "Change payments status");
+            userDAO.readAll(connection);
             addressDAO.readAll(connection);
             templateDAO.readAll(connection);
             paymentDAO.readAll(connection);
-            log.log(Level.INFO, "Read from database");
+            LOG.log(Level.INFO, "Read from database");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

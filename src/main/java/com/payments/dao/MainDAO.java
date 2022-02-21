@@ -1,11 +1,16 @@
 package com.payments.dao;
 
+import com.payments.Main;
+
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainDAO {
+    private static final Logger LOG = Logger.getLogger(Main.class.getSimpleName());
     public void createTables(Connection connection) {
 
         String s = new String();
@@ -35,7 +40,7 @@ public class MainDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //log.log(Level.INFO, "Tables created" );
+        LOG.log(Level.INFO, "Tables created");
     }
 
 

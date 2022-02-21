@@ -1,10 +1,15 @@
 package com.payments.dao;
 
+import com.payments.Main;
+
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TemplateDAO {
-    public void insertIntoTemplatesTable(Connection connection, String[] template) {
+    private static final Logger LOG = Logger.getLogger(Main.class.getSimpleName());
+    public void insert(Connection connection, String[] template) {
 
         PreparedStatement preparedStatement = null;
         try {
@@ -20,7 +25,7 @@ public class TemplateDAO {
             System.out.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-
+        LOG.log(Level.INFO, "Success insert into templates table");
     }
 
     public void readAll(Connection connection) {
@@ -40,6 +45,6 @@ public class TemplateDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        LOG.log(Level.INFO, "Success readAll from templates table");
     }
 }

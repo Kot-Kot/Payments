@@ -1,5 +1,6 @@
 package com.payments.dao;
 
+import com.payments.Main;
 import com.payments.objects.Payment;
 
 import java.sql.*;
@@ -7,8 +8,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PaymentDAO {
+    private static final Logger LOG = Logger.getLogger(Main.class.getSimpleName());
     public void insert(Connection connection, String[] payment) {
         PreparedStatement preparedStatement;
         try {
@@ -27,7 +30,7 @@ public class PaymentDAO {
             System.out.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        //log.info("Success insertIntoPaymentsTable " + LocalDateTime.now());
+        LOG.log(Level.INFO, "Success insert into payments table");
     }
 
     public List<Payment> readWithStatusNew(Connection connection){
@@ -53,6 +56,7 @@ public class PaymentDAO {
             e.printStackTrace();
         }
         System.out.println("Return payments.size() from jdbc = " + payments.size());
+        LOG.log(Level.INFO, "Success readWithStatusNew from payments table");
         return payments;
 
     }
@@ -74,7 +78,7 @@ public class PaymentDAO {
             e.printStackTrace();
         }
         System.out.println("Updated id = " + payment.getId());
-
+        LOG.log(Level.INFO, "Success update payments table");
     }
 
     public void readAll(Connection connection) {
@@ -96,6 +100,6 @@ public class PaymentDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        LOG.log(Level.INFO, "Success readAll from payments table");
     }
 }

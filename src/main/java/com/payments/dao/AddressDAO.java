@@ -1,9 +1,14 @@
 package com.payments.dao;
 
+import com.payments.Main;
+
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddressDAO {
+    private static final Logger LOG = Logger.getLogger(Main.class.getSimpleName());
     public void insert(Connection connection, String[] address) {
 
         PreparedStatement preparedStatement = null;
@@ -18,7 +23,7 @@ public class AddressDAO {
             System.out.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        //log.info("Success insertIntoAddressTable " + LocalDateTime.now());
+        LOG.log(Level.INFO, "Success insert into users_billing_address table");
     }
 
     public void readAll(Connection connection) {
@@ -35,6 +40,6 @@ public class AddressDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        LOG.log(Level.INFO, "Success readAll from users_billing_address table");
     }
 }
