@@ -27,32 +27,17 @@ public class UserDAO {
         //log.info("Success insertIntoUserTable " + LocalDateTime.now());
     }
 
-    public void readAll(Connection connection) {
-        System.out.println("Users Table");
-        try (Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery("select * from users");
-            while (rs.next()) {
-                System.out.printf("%-35s%-35s%-20s\n",
-                        rs.getString("fio"),
-                        rs.getString("email"),
-                        rs.getString("phone"));
-            }
-            statement.close();
-            connection.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
-    }
     public void readAll2(Connection connection) {
+        System.out.println();
         System.out.println("Users Table");
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("select fio, email, phone from users");
             while (rs.next()) {
                 System.out.printf("%-10s%-20s%-35s\n",
-                        rs.getString("fio")
-                        , rs.getString("email")
-                        , rs.getString("phone"));
+                        rs.getString("fio"),
+                        rs.getString("email"),
+                        rs.getString("phone"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

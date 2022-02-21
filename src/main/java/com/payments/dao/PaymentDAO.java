@@ -31,9 +31,7 @@ public class PaymentDAO {
     }
 
     public List<Payment> readWithStatusNew(Connection connection){
-        //Set<Payment> payments = new HashSet<>();
         ArrayList<Payment> payments = new ArrayList<>();
-        //Payment payment = new Payment();
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("select id, template_id, card_number, p_sum, status, creation_dt, status_changed_dt  from payments");
             while (rs.next()) {
@@ -48,7 +46,6 @@ public class PaymentDAO {
                 if (payment.getStatus().equals("new")){
                     payments.add(payment);
                 }
-
             }
             rs.close();
             connection.commit();
@@ -56,7 +53,6 @@ public class PaymentDAO {
             e.printStackTrace();
         }
         System.out.println("Return payments.size() from jdbc = " + payments.size());
-        System.out.println();
         return payments;
 
     }
@@ -82,6 +78,7 @@ public class PaymentDAO {
     }
 
     public void readAll(Connection connection) {
+        System.out.println();
         System.out.println("Payments Table");
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("select * from payments");

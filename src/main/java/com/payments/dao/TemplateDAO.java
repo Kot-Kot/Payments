@@ -20,10 +20,11 @@ public class TemplateDAO {
             System.out.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
         }
-        //log.info("Success insertIntoTemplatesTable " + LocalDateTime.now());
+
     }
 
     public void readAll(Connection connection) {
+        System.out.println();
         System.out.println("Templates Table");
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("select id, template_name, iban, purpose, contact from templates");

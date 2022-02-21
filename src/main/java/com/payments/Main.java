@@ -92,8 +92,9 @@ public class Main {
                 paymentArr[4] = paymentArr[4].replaceAll("[^A-Za-z0-9]", "");
                 paymentDAO.insert(connection, paymentArr);
             }
-            log.log(Level.INFO, "Write to database");
+
         }
+        log.log(Level.INFO, "Write to database");
         ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
         readPayments.start();
         try {

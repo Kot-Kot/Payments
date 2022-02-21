@@ -1,13 +1,9 @@
 package com.payments.dao;
 
-import com.payments.JDBC;
-
 import java.io.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
 
 public class MainDAO {
     public void createTables(Connection connection) {

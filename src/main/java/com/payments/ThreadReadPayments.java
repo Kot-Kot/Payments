@@ -25,11 +25,12 @@ public class ThreadReadPayments extends Thread {
         System.out.printf("%s started... \n", Thread.currentThread().getName());
         try {
             while (flag) {
+                System.out.println("\nEvery 1 sec");
                 List<Payment> payments = paymentDAO.readWithStatusNew(connection);
                 if (payments.isEmpty()) {
                     break;
                 }
-                System.out.println("payments.size()            =            " + payments.size());
+                System.out.println("payments.size()    =    " + payments.size());
 
                 LocalDateTime now = LocalDateTime.now();
                 for (Payment p : payments) {
@@ -44,7 +45,6 @@ public class ThreadReadPayments extends Thread {
                 }
 
                 Thread.sleep(1000);
-                System.out.println("Every 1 sec");
             }
         } catch (InterruptedException e) {
             System.out.println("Thread has been interrupted");
