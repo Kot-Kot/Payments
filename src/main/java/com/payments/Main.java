@@ -2,6 +2,8 @@ package com.payments;
 
 import com.payments.dao.*;
 import com.payments.objects.Payment;
+import org.postgresql.gss.GSSOutputStream;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.util.Date;
 import java.util.logging.*;
 
 public class Main {
+
     private static Logger LOG = Logger.getLogger(Main.class.getName());
 
     static {
@@ -38,6 +41,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        System.out.println("Main thread starts");
         UserDAO userDAO = new UserDAO();
         TemplateDAO templateDAO = new TemplateDAO();
         PaymentDAO paymentDAO = new PaymentDAO();
@@ -52,7 +56,24 @@ public class Main {
         Connection connection = connection();
         String str = "";
         ArrayList<String> stringsFromFile = new ArrayList<>();
+
         new MainDAO().createTables(connection());
+
+
+        LOG.log(Level.INFO, "Write to database");
+        ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
+        readPayments.start();
+        System.out.println("Payments thread starts");
+        LOG.log(Level.INFO, "Change payments status");
+        userDAO.readAll(connection);
+        addressDAO.readAll(connection);
+        templateDAO.readAll(connection);
+        paymentDAO.readAll(connection);
+        LOG.log(Level.INFO, "Read from database");
+
+
+
+
 
         try (FileReader reader = new FileReader("initdata.txt")) {
             int c;
@@ -99,20 +120,20 @@ public class Main {
             }
 
         }
-        LOG.log(Level.INFO, "Write to database");
-        ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
-        readPayments.start();
-        try {
-            readPayments.join();
+//        LOG.log(Level.INFO, "Write to database");
+//        ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
+//        readPayments.start();
+//        try {
+//            readPayments.join();
             LOG.log(Level.INFO, "Change payments status");
             userDAO.readAll(connection);
             addressDAO.readAll(connection);
             templateDAO.readAll(connection);
             paymentDAO.readAll(connection);
             LOG.log(Level.INFO, "Read from database");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -120,11 +141,11 @@ public class Main {
         String url = "jdbc:postgresql://localhost:5433/postgres";
         String user = "postgres";
         String password = "9090";
-        try {
-            DriverManager.registerDriver(new org.postgresql.Driver());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            DriverManager.registerDriver(new org.postgresql.Driver());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);

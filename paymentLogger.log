@@ -1,37 +1,27 @@
-[2022-04-12 17:38:40] [INFO   ] Tables created 
-[2022-04-12 17:38:40] [INFO   ] Read from init file 
-[2022-04-12 17:38:40] [INFO   ] Success insert into users table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into users_billing_address table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into templates table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into templates table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into users_billing_address table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into templates table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into templates table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into payments table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into payments table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into payments table 
-[2022-04-12 17:38:40] [INFO   ] Success insert into payments table 
-[2022-04-12 17:38:40] [INFO   ] Write to database 
-[2022-04-12 17:38:40] [INFO   ] Success readWithStatusNew from payments table 
-[2022-04-12 17:38:41] [INFO   ] Success readWithStatusNew from payments table 
-[2022-04-12 17:38:42] [INFO   ] Success readWithStatusNew from payments table 
-[2022-04-12 17:38:42] [INFO   ] Success update payments table 
-[2022-04-12 17:38:42] [INFO   ] Success update payments table 
-[2022-04-12 17:38:42] [INFO   ] Success update payments table 
-[2022-04-12 17:38:42] [INFO   ] Success update payments table 
-[2022-04-12 17:38:43] [INFO   ] Success readWithStatusNew from payments table 
-[2022-04-12 17:38:43] [INFO   ] Success update payments table 
-[2022-04-12 17:38:43] [INFO   ] Success update payments table 
-[2022-04-12 17:38:44] [INFO   ] Success readWithStatusNew from payments table 
-[2022-04-12 17:38:44] [INFO   ] Success update payments table 
-[2022-04-12 17:38:45] [INFO   ] Success readWithStatusNew from payments table 
-[2022-04-12 17:38:45] [INFO   ] Success update payments table 
-[2022-04-12 17:38:46] [INFO   ] Success readWithStatusNew from payments table 
-[2022-04-12 17:38:46] [INFO   ] Success update payments table 
-[2022-04-12 17:38:48] [INFO   ] Success readWithStatusNew from payments table 
-[2022-04-12 17:38:48] [INFO   ] Change payments status 
-[2022-04-12 17:38:48] [INFO   ] Success readAll from users table 
-[2022-04-12 17:38:48] [INFO   ] Success readAll from users_billing_address table 
-[2022-04-12 17:38:48] [INFO   ] Success readAll from templates table 
-[2022-04-12 17:38:48] [INFO   ] Success readAll from payments table 
-[2022-04-12 17:38:48] [INFO   ] Read from database 
+[2022-05-08 18:58:07] [INFO   ] Tables created 
+[2022-05-08 18:58:07] [INFO   ] Write to database 
+[2022-05-08 18:58:07] [INFO   ] Change payments status 
+[2022-05-08 18:58:07] [INFO   ] Success readAll from users table 
+[2022-05-08 18:58:07] [INFO   ] Success readAll from users_billing_address table 
+[2022-05-08 18:58:07] [INFO   ] Success readAll from templates table 
+[2022-05-08 18:58:07] [INFO   ] Success readAll from payments table 
+[2022-05-08 18:58:07] [INFO   ] Read from database 
+[2022-05-08 18:58:07] [INFO   ] Read from init file 
+[2022-05-08 18:58:07] [INFO   ] Success insert into users table 
+[2022-05-08 18:58:07] [INFO   ] Success readWithStatusNew from payments table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into users_billing_address table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into templates table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into templates table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into users_billing_address table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into templates table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into templates table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into payments table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into payments table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into payments table 
+[2022-05-08 18:58:07] [INFO   ] Success insert into payments table 
+[2022-05-08 18:58:07] [INFO   ] Change payments status 
+[2022-05-08 18:58:07] [INFO   ] Success readAll from users table 
+[2022-05-08 18:58:07] [INFO   ] Success readAll from users_billing_address table 
+[2022-05-08 18:58:07] [INFO   ] Success readAll from templates table 
+[2022-05-08 18:58:07] [INFO   ] Success readAll from payments table 
+[2022-05-08 18:58:07] [INFO   ] Read from database 

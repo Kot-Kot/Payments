@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class PaymentDAO {
     private static final Logger LOG = Logger.getLogger(Main.class.getSimpleName());
-    public void insert(Connection connection, String[] payment) {
+    public synchronized void insert(Connection connection, String[] payment) {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO payments (template_id, card_number, p_sum, status, creation_dt, status_changed_dt) VALUES (?, ?, ?, ?, ?, ?);");
@@ -33,10 +33,50 @@ public class PaymentDAO {
         LOG.log(Level.INFO, "Success insert into payments table");
     }
 
-    public List<Payment> readWithStatusNew(Connection connection){
+    public synchronized boolean isEmpty(Connection connection){
+        boolean isEmpty = false;
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery("select count(*) from payments");
+            if (rs.next() == false) {
+                System.out.println("ResultSet in empty in Java");
+                isEmpty = true;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("isEmpty = " + isEmpty);
+        return isEmpty;
+    }
+
+//    public synchronized boolean isEmpty(Connection connection){
+//        int size = 0;
+//        try (Statement statement = connection.createStatement()) {
+//            ResultSet rs = statement.executeQuery("select count(*) from payments");
+//            while(rs.next()) {
+//                size++;
+//
+//                System.out.print(rs.getLong("id") + ";  ");
+//                System.out.print(rs.getString("status"));
+//
+//
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("Payments size = " + size);
+//        return (size == 0) ? true : false;
+//    }
+
+
+
+    public synchronized List<Payment> readWithStatusNew(Connection connection){
         ArrayList<Payment> payments = new ArrayList<>();
         try (Statement statement = connection.createStatement()) {
+
             ResultSet rs = statement.executeQuery("select id, template_id, card_number, p_sum, status, creation_dt, status_changed_dt  from payments");
+            System.out.println("RS is null = " + rs.wasNull());
             while (rs.next()) {
                 Payment payment = new Payment();
                 payment.setId(rs.getLong("id"));
@@ -61,7 +101,7 @@ public class PaymentDAO {
 
     }
 
-    public void update(Connection connection, Payment payment) {
+    public synchronized void update(Connection connection, Payment payment) {
         ArrayList<Payment> payments = new ArrayList<>();
         try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
             ResultSet rs = statement.executeQuery("select * from payments");
@@ -81,11 +121,12 @@ public class PaymentDAO {
         LOG.log(Level.INFO, "Success update payments table");
     }
 
-    public void readAll(Connection connection) {
+    public synchronized void readAll(Connection connection) {
         System.out.println();
         System.out.println("Payments Table");
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("select * from payments");
+
             while (rs.next()) {
                 System.out.println();
                 System.out.printf("%-15s%-15s%-20s%-10s%-10s%-40s%-40s\n",
@@ -102,4 +143,6 @@ public class PaymentDAO {
         }
         LOG.log(Level.INFO, "Success readAll from payments table");
     }
+
+
 }
