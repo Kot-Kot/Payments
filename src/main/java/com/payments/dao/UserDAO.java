@@ -3,6 +3,8 @@ package com.payments.dao;
 import com.payments.Main;
 import com.payments.objects.User;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class UserDAO {
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("select fio, email, phone from users");
             while (rs.next()) {
-                System.out.printf("%-10s%-20s%-35s\n",
+                System.out.printf("%-30s%-30s%-35s\n",
                         rs.getString("fio"),
                         rs.getString("email"),
                         rs.getString("phone"));
