@@ -101,6 +101,35 @@ public class PaymentDAO {
 
     }
 
+    public synchronized List<Payment> read(Connection connection){
+        ArrayList<Payment> payments = new ArrayList<>();
+        try (Statement statement = connection.createStatement()) {
+
+            ResultSet rs = statement.executeQuery("select id, template_id, card_number, p_sum, status, creation_dt, status_changed_dt  from payments");
+            System.out.println("RS is null = " + rs.wasNull());
+            while (rs.next()) {
+                Payment payment = new Payment();
+                payment.setId(rs.getLong("id"));
+                payment.setTemplateId(rs.getLong("template_id"));
+                payment.setCardNumber(rs.getString("card_number"));
+                payment.setSum(rs.getDouble("p_sum"));
+                payment.setStatus(rs.getString("status"));
+                payment.setCreationDateTime(rs.getTimestamp("creation_dt").toLocalDateTime());
+                payment.setStatusChangedDateTime(rs.getTimestamp("status_changed_dt").toLocalDateTime());
+                payments.add(payment);
+
+            }
+            rs.close();
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Return payments.size() from jdbc = " + payments.size());
+        LOG.log(Level.INFO, "Success read from payments table");
+        return payments;
+
+    }
+
     public synchronized void update(Connection connection, Payment payment) {
         ArrayList<Payment> payments = new ArrayList<>();
         try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {

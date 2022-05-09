@@ -64,12 +64,7 @@ public class Main {
         ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
         readPayments.start();
         System.out.println("Payments thread starts");
-        LOG.log(Level.INFO, "Change payments status");
-        userDAO.readAll(connection);
-        addressDAO.readAll(connection);
-        templateDAO.readAll(connection);
-        paymentDAO.readAll(connection);
-        LOG.log(Level.INFO, "Read from database");
+
 
 
 
@@ -123,17 +118,17 @@ public class Main {
 //        LOG.log(Level.INFO, "Write to database");
 //        ThreadReadPayments readPayments = new ThreadReadPayments("ThreadReadPayments", connection());
 //        readPayments.start();
-//        try {
-//            readPayments.join();
+        try {
+            readPayments.join();
             LOG.log(Level.INFO, "Change payments status");
             userDAO.readAll(connection);
             addressDAO.readAll(connection);
             templateDAO.readAll(connection);
             paymentDAO.readAll(connection);
             LOG.log(Level.INFO, "Read from database");
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

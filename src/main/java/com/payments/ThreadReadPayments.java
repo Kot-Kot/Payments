@@ -27,11 +27,12 @@ public class ThreadReadPayments extends Thread {
             while (flag) {
                 System.out.println("\nEvery 1 sec");
                 List<Payment> payments = paymentDAO.readWithStatusNew(connection);
-                boolean isEmpty = paymentDAO.isEmpty(connection);
-                System.out.println("Payments is empty = " + isEmpty);
-                System.out.println("Payments with NEW is empty = " + payments.isEmpty());
+                List<Payment> payments2 = paymentDAO.read(connection);
 
-                if (!isEmpty && payments.isEmpty()) {
+                System.out.println("Payments with NEW is empty = " + payments.isEmpty());
+                System.out.println("Payments is empty = " + payments.isEmpty());
+
+                if (!payments2.isEmpty() && payments.isEmpty()) {
                     break;
                 }
                 System.out.println("payments.size()    =    " + payments.size());
